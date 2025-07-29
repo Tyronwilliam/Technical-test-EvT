@@ -5,5 +5,5 @@ defineProps<{
 </script>
 
 <template>
-  <p v-show="error !== ''" class="text-red-500">{{ error }}</p>
+  <p v-show="error !== ''" class="text-red-500 italic text-sm">{{ error }}</p>
 </template>

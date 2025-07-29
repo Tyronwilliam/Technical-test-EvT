@@ -3,6 +3,7 @@ defineProps<{
   type: 'button' | 'submit' | 'reset'
   label: string
   disabled?: boolean
+  loading?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -15,7 +16,10 @@ const emit = defineEmits<{
     :type="type"
     @click="emit && emit('click')"
     :disabled="disabled"
-    :class="[disabled ? 'cursor-not-allowed bg-gray-400 hover: ' : 'bg-gray-900 hover:bg-gray-800']"
+    :class="[
+      disabled ? 'cursor-not-allowed bg-gray-400 ' : 'bg-gray-900 hover:bg-gray-800',
+      loading && 'cursor-progress'
+    ]"
   >
     {{ label }}
   </button>
