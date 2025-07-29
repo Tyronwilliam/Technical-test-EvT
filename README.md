@@ -36,6 +36,11 @@ Une application légère de gestion de tâches avec Vue 3 et TypeScript, permett
   
 ---
 
+## 📚 Documentation
+
+Tout le détail des composants, composables et fonctionnalités est disponible dans le dossier [`documentation`](./documentation).
+
+
 ## 🧪 Stack technique
 
 - **Vue 3** (Composition API)  
