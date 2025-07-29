@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const model = defineModel<string>('formTitle')
+const model = defineModel<string>()
 defineProps<{
   id: string
   name: string

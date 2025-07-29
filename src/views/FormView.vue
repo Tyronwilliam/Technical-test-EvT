@@ -22,7 +22,7 @@ const { formTitle, formError, isDisabled, isLoading, addTodo } = useForm(todoLis
         name="formTitle"
         id="formTitle"
         placeholder="Check food supply"
-        v-model:formTitle="formTitle"
+        v-model="formTitle"
         label="Add todo"
       />
       <Button
