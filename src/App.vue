@@ -39,16 +39,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="w-full flex items-center justify-center border-2 p-4">
+  <main class="w-full h-full min-h-screen flex items-center justify-center p-4">
     <p v-if="isLoading">Please wait while fetching Todos</p>
-    
+
     <section v-else class="w-full h-full flex flex-col items-center justify-center">
+      <FormView />
       <TodoView
         :deleteTodo="deleteTodo"
         :completedTodos="completedTodos"
         :incompleteTodos="incompleteTodos"
       />
-      <FormView />
     </section>
   </main>
 </template>

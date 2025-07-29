@@ -19,7 +19,7 @@ const handleDeleteTodo = (todoId: Todo['id']) => {
     :class="[todo.completed ? 'bg-green-600' : 'bg-red-600']"
   ></span>
   <Button
-    class="w-fit p-2 text-sm self-end"
+    class="w-fit p-2 text-sm self-end rounded-md"
     type="button"
     @click="handleDeleteTodo(todo.id)"
     label="Delete"

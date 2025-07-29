@@ -8,17 +8,23 @@ export const useForm = (todoList: Ref<Todo[], Todo[]> | undefined) => {
   const isDisabled = ref<boolean>(false)
 
   const addTodo = () => {
-    const newTodo: Todo = {
-      id: todoList!.value?.length + 1,
-      userId: 2,
-      title: formTitle.value,
-      completed: false
-    }
-    todoList!.value = [newTodo, ...todoList!.value]
-    formTitle.value = ''
-  }
+    isDisabled.value = true
+    // Simuler POST API Request
+    setTimeout(() => {
+      const newTodo: Todo = {
+        id: todoList!.value?.length + 1,
+        userId: 2,
+        title: formTitle.value,
+        completed: false
+      }
 
-  watch(formTitle, (newValue) => {
+      todoList!.value = [newTodo, ...todoList!.value]
+      formTitle.value = ''
+      isDisabled.value = false
+    }, 1500)
+  }
+  
+  function validateTitle(newValue: string) {
     if (!noNumberAllowed.test(newValue)) {
       isDisabled.value = true
       formError.value = 'Number Not Allowed'
@@ -26,6 +32,10 @@ export const useForm = (todoList: Ref<Todo[], Todo[]> | undefined) => {
       isDisabled.value = false
       formError.value = ''
     }
+  }
+
+  watch(formTitle, (newValue) => {
+    validateTitle(newValue)
   })
 
   return { formTitle, formError, isDisabled, addTodo }

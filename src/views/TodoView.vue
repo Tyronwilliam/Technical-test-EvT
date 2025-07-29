@@ -11,11 +11,11 @@ defineProps<{
 }>()
 
 const cardStyle =
-  'relative max-w-[250px] w-full flex flex-col shrink-0 rounded-md px-3.5 py-2 justify-between h-[150px] bg-slate-800'
+  'relative max-w-3xs w-full flex flex-col shrink-0 rounded-md px-3.5 py-2 justify-between h-[150px] bg-slate-800'
 </script>
 
 <template>
-  <section class="w-[70%] flex justify-center gap-3">
+  <section class="w-[70%] flex flex-col lg:flex-row justify-center gap-3">
     <Column title="Todo Completed">
       <Card v-for="todo in completedTodos" :key="todo.id" :class="cardStyle">
         <TodoContent :todo="todo" @delete-todo="deleteTodo" />

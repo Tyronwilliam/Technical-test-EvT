@@ -13,15 +13,18 @@ const { formTitle, formError, isDisabled, addTodo } = useForm(todoList)
 </script>
 
 <template>
-  <form @submit.prevent="addTodo" class="w-fit flex flex-col gap-2 item-center justify-center">
+  <form
+    @submit.prevent="addTodo"
+    class="w-fit h-fit flex gap-2 justify-center mb-4 bg-slate-700 border-gray-900 p-4 rounded-md border-2"
+  >
     <InputText
       name="formTitle"
       id="formTitle"
       placeholder="Check food supply"
       v-model:formTitle="formTitle"
-      label="Title"
+      label="Add todo"
     />
     <Error :error="formError" />
-    <Button type="submit" class="w-fit p-2" label="Add" :disabled="isDisabled" />
+    <Button type="submit" class="w-fit h-fit p-2 self-end" label="Save" :disabled="isDisabled" />
   </form>
 </template>
