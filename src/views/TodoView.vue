@@ -15,7 +15,7 @@ const cardStyle =
 </script>
 
 <template>
-  <section class="w-[70%] flex flex-col lg:flex-row justify-center gap-3">
+  <section class="w-full md:w-[70%] flex flex-col lg:flex-row justify-center gap-3">
     <Column title="Todo Completed">
       <Card v-for="todo in completedTodos" :key="todo.id" :class="cardStyle">
         <TodoContent :todo="todo" @delete-todo="deleteTodo" />
