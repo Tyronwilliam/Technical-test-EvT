@@ -22,10 +22,7 @@ onMounted(fetchTodolist)
   <main class="w-full h-full min-h-screen flex items-center justify-center p-4">
     <Error v-if="!isLoading && errorApi" :error="errorApi" />
     <p v-else-if="isLoading && !errorApi">Please wait while fetching Todos</p>
-    <section
-      v-else
-      class="relative w-full h-full flex flex-col items-center justify-center"
-    >
+    <section v-else class="w-full h-full flex flex-col items-center justify-center">
       <FormView />
       <TodoView
         :deleteTodo="deleteTodo"
