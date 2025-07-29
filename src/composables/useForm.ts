@@ -1,29 +1,29 @@
 import { ref, watch, type Ref } from 'vue'
 import { noNumberAllowed } from '../utils/regex'
 import type { Todo } from '../type/todo'
+import { delay } from '../utils/delay'
 
 export const useForm = (todoList: Ref<Todo[], Todo[]> | undefined) => {
   const formError = ref('')
   const formTitle = ref<Todo['title']>('')
   const isDisabled = ref<boolean>(false)
   const isLoading = ref<boolean>(false)
-  const addTodo = () => {
+  const addTodo = async () => {
     isDisabled.value = true
     isLoading.value = true
-    // Simuler POST API Request
-    setTimeout(() => {
-      const newTodo: Todo = {
-        id: todoList!.value?.length + 1,
-        userId: 2,
-        title: formTitle.value,
-        completed: false
-      }
+    await delay(2500)
 
-      todoList!.value = [newTodo, ...todoList!.value]
-      formTitle.value = ''
-      isDisabled.value = false
-      isLoading.value = false
-    }, 1500)
+    const newTodo: Todo = {
+      id: todoList!.value?.length + 1,
+      userId: 2,
+      title: formTitle.value,
+      completed: false
+    }
+
+    todoList!.value = [newTodo, ...todoList!.value]
+    formTitle.value = ''
+    isDisabled.value = false
+    isLoading.value = false
   }
 
   function validateTitle(newValue: string) {
