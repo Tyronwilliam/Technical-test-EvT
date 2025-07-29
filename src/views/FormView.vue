@@ -3,12 +3,12 @@ import type { Ref } from 'vue'
 import { useForm } from '../composables/useForm'
 import type { Todo } from '../type/todo'
 import Button from '../components/Button.vue'
-
 import { inject } from 'vue'
 import InputText from '../components/InputText.vue'
+
 const todoList = inject<Ref<Todo[]>>('todoList')
 
-const { formTitle, formError, addTodo } = useForm(todoList)
+const { formTitle, formError, isDisabled, addTodo } = useForm(todoList)
 </script>
 
 <template>
@@ -21,6 +21,6 @@ const { formTitle, formError, addTodo } = useForm(todoList)
       label="Title"
     />
     <p v-show="formError !== ''" class="text-red-500">{{ formError }}</p>
-    <Button type="submit" class="w-fit p-2" label="Add" />
+    <Button type="submit" class="w-fit p-2" label="Add" :disabled="isDisabled" />
   </form>
 </template>

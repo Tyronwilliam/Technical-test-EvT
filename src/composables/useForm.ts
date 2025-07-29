@@ -1,16 +1,13 @@
-import { ref, type Ref } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 import { noNumberAllowed } from '../utils/regex'
 import type { Todo } from '../type/todo'
 
 export const useForm = (todoList: Ref<Todo[], Todo[]> | undefined) => {
   const formError = ref('')
   const formTitle = ref<Todo['title']>('')
+  const isDisabled = ref<boolean>(false)
 
   const addTodo = () => {
-    if (!noNumberAllowed.test(formTitle.value)) {
-      return (formError.value = 'Number Not Allowed')
-    }
-
     const newTodo: Todo = {
       id: todoList!.value?.length + 1,
       userId: 2,
@@ -21,5 +18,15 @@ export const useForm = (todoList: Ref<Todo[], Todo[]> | undefined) => {
     formTitle.value = ''
   }
 
-  return { formTitle, formError, addTodo }
+  watch(formTitle, (newValue) => {
+    if (!noNumberAllowed.test(newValue)) {
+      isDisabled.value = true
+      formError.value = 'Number Not Allowed'
+    } else {
+      isDisabled.value = false
+      formError.value = ''
+    }
+  })
+
+  return { formTitle, formError, isDisabled, addTodo }
 }
