@@ -5,6 +5,7 @@ import type { Todo } from '../type/todo'
 import Button from '../components/Button.vue'
 import { inject } from 'vue'
 import InputText from '../components/InputText.vue'
+import Error from '../components/Error.vue'
 
 const todoList = inject<Ref<Todo[]>>('todoList')
 
@@ -20,7 +21,7 @@ const { formTitle, formError, isDisabled, addTodo } = useForm(todoList)
       v-model:formTitle="formTitle"
       label="Title"
     />
-    <p v-show="formError !== ''" class="text-red-500">{{ formError }}</p>
+    <Error :error="formError" />
     <Button type="submit" class="w-fit p-2" label="Add" :disabled="isDisabled" />
   </form>
 </template>
