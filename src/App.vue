@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, provide, ref } from 'vue'
 import { getTodo } from './services/todo'
 import type { Todo } from './type/todo'
 import TodoView from './views/TodoView.vue'
-import { useForm } from './composables/useForm'
-import InputText from './components/InputText.vue'
+import FormView from './views/FormView.vue'
 
 const todoList = ref<Todo[]>([])
+provide('todoList', todoList)
+
 const isLoading = ref<boolean>(false)
 const errorApi = ref('')
-const { formTitle, errorForm, addTodo } = useForm(todoList)
 const completedTodos = computed(() => todoList.value.filter((todo) => todo.completed))
 
 const incompleteTodos = computed(() => todoList.value.filter((todo) => !todo.completed))
@@ -47,20 +47,7 @@ onMounted(() => {
         :completedTodos="completedTodos"
         :incompleteTodos="incompleteTodos"
       />
-
-      <form @submit.prevent="" class="w-fit flex flex-col gap-2 item-center justify-center">
-        <div class="flex flex-col gap-2 mx-auto">
-          <label for="formTitle">Todo title :</label>
-          <InputText
-            name="formTitle"
-            id="formTitle"
-            placeholder="Check food supply"
-            v-model:formTitle="formTitle"
-          />
-        </div>
-        <p v-show="errorForm !== ''" class="text-red-500">{{ errorForm }}</p>
-        <button type="submit" class="w-fit p-2" @click="addTodo">Add</button>
-      </form>
+      <FormView :todo-list="todoList" />
     </section>
   </main>
 </template>

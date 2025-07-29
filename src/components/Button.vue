@@ -10,7 +10,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <button  :type="type" @click="emit('click')">
+  <button :type="type" @click="emit && emit('click')">
     {{ label }}
   </button>
 </template>
