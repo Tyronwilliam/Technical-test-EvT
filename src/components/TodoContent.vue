@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { Todo } from '../type/todo'
+import Button from './Button.vue'
 
 const emits = defineEmits(['deleteTodo'])
 defineProps<{
@@ -17,7 +18,10 @@ const handleDeleteTodo = (todoId: Todo['id']) => {
     class="w-4 h-4 rounded-full absolute bottom-[10px] left-[10px]"
     :class="[todo.completed ? 'bg-green-600' : 'bg-red-600']"
   ></span>
-  <button class="w-fit p-2 text-sm self-end" type="button" @click="handleDeleteTodo(todo.id)">
-    Delete
-  </button>
+  <Button
+    class="w-fit p-2 text-sm self-end"
+    type="button"
+    @click="handleDeleteTodo(todo.id)"
+    label="Delete"
+  />
 </template>
