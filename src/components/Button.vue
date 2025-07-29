@@ -17,7 +17,7 @@ const emit = defineEmits<{
     @click="emit && emit('click')"
     :disabled="disabled"
     :class="[
-      disabled ? 'cursor-not-allowed bg-gray-400 ' : 'bg-gray-900 hover:bg-gray-800',
+      disabled ? 'cursor-not-allowed bg-gray-400 ' : 'cursor-pointer bg-gray-900 hover:bg-gray-800',
       loading && 'cursor-progress'
     ]"
   >

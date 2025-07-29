@@ -14,6 +14,11 @@ const completedTodos = computed(() => todoList.value.filter((todo) => todo.compl
 
 const incompleteTodos = computed(() => todoList.value.filter((todo) => !todo.completed))
 
+const openedTodoId = ref<Todo['id'] | null>(null)
+const toggleIsOpen = (todoId: Todo['id']) => {
+  openedTodoId.value = openedTodoId.value === todoId ? null : todoId
+}
+
 const deleteTodo = (todoId: Todo['id']) => {
   const filterTodolist = todoList.value.filter((todo) => todo.id !== todoId)
   todoList.value = filterTodolist
@@ -42,12 +47,14 @@ onMounted(() => {
   <main class="w-full h-full min-h-screen flex items-center justify-center p-4">
     <p v-if="isLoading">Please wait while fetching Todos</p>
 
-    <section v-else class="w-full h-full flex flex-col items-center justify-center">
+    <section v-else class="relative w-full h-full flex flex-col items-center justify-center">
       <FormView />
       <TodoView
         :deleteTodo="deleteTodo"
         :completedTodos="completedTodos"
         :incompleteTodos="incompleteTodos"
+        :openedTodoId="openedTodoId"
+        :toggleIsOpen="toggleIsOpen"
       />
     </section>
   </main>

@@ -8,22 +8,34 @@ defineProps<{
   incompleteTodos: Todo[]
   completedTodos: Todo[]
   deleteTodo: (todoId: Todo['id']) => void
+  toggleIsOpen: (todoId: Todo['id']) => void
+  openedTodoId: Todo['id'] | null
 }>()
 
 const cardStyle =
-  'relative max-w-3xs w-full flex flex-col shrink-0 rounded-md px-3.5 py-2 justify-between h-[150px] bg-slate-800'
+  'relative max-w-3xs w-full flex flex-col shrink-0 rounded-md px-3.5 py-2 justify-between min-h-[150px] bg-slate-800'
 </script>
 
 <template>
   <section class="w-full md:w-[70%] flex flex-col lg:flex-row justify-center gap-3">
     <Column title="Todo Completed">
       <Card v-for="todo in completedTodos" :key="todo.id" :class="cardStyle">
-        <TodoContent :todo="todo" @delete-todo="deleteTodo" />
+        <TodoContent
+          :todo="todo"
+          @toggle-is-open="toggleIsOpen"
+          :open="openedTodoId === todo.id"
+          @delete-todo="deleteTodo"
+        />
       </Card>
     </Column>
     <Column title="Todo Incomplete">
       <Card v-for="todo in incompleteTodos" :key="todo.id" :class="cardStyle">
-        <TodoContent :todo="todo" @delete-todo="deleteTodo" />
+        <TodoContent
+          :todo="todo"
+          @toggle-is-open="toggleIsOpen"
+          :open="openedTodoId === todo.id"
+          @delete-todo="deleteTodo"
+        />
       </Card>
     </Column>
   </section>
